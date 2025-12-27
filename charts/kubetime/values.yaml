@@ -1,0 +1,19 @@
+namespace: kubetime
+
+backend:
+  image: vinod5775/kubetime-backend:latest
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 80
+  url: https://api.kubetime.io   # backend public URL
+
+agent:
+  image: vinod5775/kubetime-agent:latest
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
