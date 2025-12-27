@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kubetime-agent
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: kubetime-agent
+  template:
+    metadata:
+      labels:
+        app: kubetime-agent
+    spec:
+      serviceAccountName: kubetime-agent
+      containers:
+        - name: agent
+          image: {{ .Values.agent.image }}
+          imagePullPolicy: Always
+          env:
+            - name: BACKEND_URL
+              value: {{ .Values.backend.url | quote }}
+            - name: HELM_RELEASE
+              value: {{ .Release.Name | quote }}
+            - name: BOOTSTRAP_MODE
+              valueFrom:
+                secretKeyRef:
+                  name: kubetime-agent-bootstrap
+                  key: bootstrap
+          resources:
+{{ toYaml .Values.agent.resources | indent 12 }}
