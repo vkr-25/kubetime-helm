@@ -3,10 +3,24 @@ namespace: kubetime
 backend:
   image: vinod5775/kubetime-backend:latest
   replicas: 1
+
   service:
     type: ClusterIP
     port: 80
-  url: https://api.kubetime.io   # backend public URL
+
+  # Public backend URL (used by frontend / agent registration)
+  url: https://api.kubetime.io
+
+  env:
+    # Supabase Postgres
+    DATABASE_URL: "postgresql://postgres:SUPABASE_DB_PASSWORD@db.ertatexaujscanjuwgzg.supabase.co:5432/postgres"
+
+    # Supabase Auth
+    SUPABASE_PROJECT_URL: "https://ertatexaujscanjuwgzg.supabase.co"
+    SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydGF0ZXhhdWpzY2FuanV3Z3pnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY4NjAwNzMsImV4cCI6MjA4MjQzNjA3M30.-pTyRc4p8AGjrcReibvPfIOX10o2cY6tgwujk4Xrsw0"
+
+    # Used only for agent JWTs
+    JWT_SECRET: "kubetime-agent-secret"
 
 agent:
   image: vinod5775/kubetime-agent:latest
