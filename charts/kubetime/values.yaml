@@ -1,7 +1,7 @@
 namespace: kubetime
 
 backend:
-  image: vinod5775/kubetime-backend:latest
+  image: vinod5775/kubetime-backend:v2
   replicas: 1
 
   service:
@@ -23,7 +23,7 @@ backend:
     JWT_SECRET: "kubetime-agent-secret"
 
 agent:
-  image: vinod5775/kubetime-agent:latest
+  image: vinod5775/kubetime-agent:v1
   resources:
     requests:
       cpu: 50m
