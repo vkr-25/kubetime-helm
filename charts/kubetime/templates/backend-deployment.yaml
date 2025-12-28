@@ -16,5 +16,27 @@ spec:
       containers:
         - name: backend
           image: {{ .Values.backend.image }}
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
+
+          env:
+            - name: DATABASE_URL
+              value: {{ .Values.backend.env.DATABASE_URL | quote }}
+
+            - name: SUPABASE_PROJECT_URL
+              value: {{ .Values.backend.env.SUPABASE_PROJECT_URL | quote }}
+
+            - name: SUPABASE_ANON_KEY
+              value: {{ .Values.backend.env.SUPABASE_ANON_KEY | quote }}
+
+            - name: JWT_SECRET
+              value: {{ .Values.backend.env.JWT_SECRET | quote }}
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
