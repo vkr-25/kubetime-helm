@@ -20,12 +20,10 @@ spec:
           env:
             - name: BACKEND_URL
               value: {{ .Values.backend.url | quote }}
-            - name: HELM_RELEASE
-              value: {{ .Release.Name | quote }}
-            - name: BOOTSTRAP_MODE
-              valueFrom:
-                secretKeyRef:
-                  name: kubetime-agent-bootstrap
-                  key: bootstrap
+
+            # 🔑 SaaS identity (MANDATORY)
+            - name: COMPANY_ID
+              value: {{ .Values.agent.env.COMPANY_ID | quote }}
+
           resources:
 {{ toYaml .Values.agent.resources | indent 12 }}
