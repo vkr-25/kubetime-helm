@@ -24,6 +24,11 @@ backend:
 
 agent:
   image: vinod5775/kubetime-agent:v3
+
+  env:
+    # 🔑 REQUIRED: SaaS tenant identifier
+    COMPANY_ID: "fae51193-b20e-4691-baac-49d038b90906"
+
   resources:
     requests:
       cpu: 50m
