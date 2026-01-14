@@ -1,7 +1,7 @@
 namespace: kubetime
 
 backend:
-  image: vinod5775/kubetime-backend:v4
+  image: vinod5775/kubetime-backend:v5
   replicas: 1
 
   service:
@@ -23,7 +23,7 @@ backend:
     JWT_SECRET: "kubetime-agent-secret"
 
 agent:
-  image: vinod5775/kubetime-agent:v4
+  image: vinod5775/kubetime-agent:v5
 
   env:
     # 🔑 REQUIRED: SaaS tenant identifier
