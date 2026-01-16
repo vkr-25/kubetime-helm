@@ -18,6 +18,7 @@ rules:
       - pods
       - pods/status
       - services
+      - serviceaccounts
       - namespaces
       - events
     verbs: ["get", "list", "watch"]
