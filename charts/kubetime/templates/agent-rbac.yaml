@@ -14,7 +14,9 @@ rules:
   - apiGroups: [""]
     resources:
       - nodes
+      - nodes/status
       - pods
+      - pods/status
       - services
       - namespaces
       - events
