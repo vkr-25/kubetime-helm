@@ -13,6 +13,14 @@ spec:
         app: kubetime-agent
     spec:
       serviceAccountName: kubetime-agent
+
+      # ✅ CRITICAL FOR NODE VISIBILITY
+      hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
+
+      tolerations:
+        - operator: "Exists"
+
       containers:
         - name: agent
           image: {{ .Values.agent.image }}
@@ -21,7 +29,6 @@ spec:
             - name: BACKEND_URL
               value: {{ .Values.backend.url | quote }}
 
-            # 🔑 SaaS identity (MANDATORY)
             - name: COMPANY_ID
               value: {{ .Values.agent.env.COMPANY_ID | quote }}
 
