@@ -10,26 +10,41 @@ kind: ClusterRole
 metadata:
   name: kubetime-agent
 rules:
-  # Core resources
+  # ================= CORE =================
   - apiGroups: [""]
     resources:
       - nodes
       - nodes/status
+      - nodes/proxy
       - pods
       - pods/status
       - services
-      - serviceaccounts
+      - endpoints
       - namespaces
+      - serviceaccounts
       - events
     verbs: ["get", "list", "watch"]
 
-  # Workloads
+  # ================= APPS =================
   - apiGroups: ["apps"]
     resources:
       - deployments
       - replicasets
       - statefulsets
       - daemonsets
+    verbs: ["get", "list", "watch"]
+
+  # ================= BATCH =================
+  - apiGroups: ["batch"]
+    resources:
+      - jobs
+      - cronjobs
+    verbs: ["get", "list", "watch"]
+
+  # ================= COORDINATION =================
+  - apiGroups: ["coordination.k8s.io"]
+    resources:
+      - leases
     verbs: ["get", "list", "watch"]
 
 ---
