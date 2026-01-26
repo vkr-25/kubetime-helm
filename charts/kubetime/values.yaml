@@ -9,7 +9,7 @@ backend:
     port: 80
 
   # Public backend URL (used by frontend / agent registration)
-  url: https://api.kubetime.io
+  url: http://kubetime-backend.kubetime.svc.cluster.local
 
   env:
     # Supabase Postgres
@@ -27,7 +27,7 @@ agent:
 
   env:
     # 🔑 REQUIRED: SaaS tenant identifier
-    COMPANY_ID: "fae51193-b20e-4691-baac-49d038b90906"
+    COMPANY_ID: "9f0e60e2-e404-4c97-8273-a4c0d0408862"
 
   resources:
     requests:
